@@ -1086,7 +1086,7 @@ class PatchSet(object):
             srclineno += 1
           line2write = hline[1:]
           # detect if line ends are consistent in source file
-          if sum([bool(lineends[x]) for x in lineends]) == 1:
+          if sum(bool(lineends[x]) for x in lineends) == 1:
             newline = [x for x in lineends if lineends[x] != 0][0]
             yield line2write.rstrip(b"\r\n")+newline
           else: # newlines are mixed
