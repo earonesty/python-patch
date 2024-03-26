@@ -1076,7 +1076,7 @@ class PatchSet(object):
 
       for hline in h.text:
         # todo: check \ No newline at the end of file
-        if hline.startswith(b"-") or hline.startswith(b"\\"):
+        if hline.startswith((b"-", b"\\")):
           get_line()
           srclineno += 1
           continue
