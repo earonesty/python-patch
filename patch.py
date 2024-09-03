@@ -1004,7 +1004,7 @@ class PatchSet(object):
       pass
 
     lineno = 1
-    line = fp.readline()
+    line = fp.readline(5_000_000)
     hno = None
     try:
       for hno, h in enumerate(hunks):
@@ -1013,7 +1013,7 @@ class PatchSet(object):
           if not len(line): # eof
             debug("check failed - premature eof before hunk: %d" % (hno+1))
             raise NoMatch
-          line = fp.readline()
+          line = fp.readline(5_000_000)
           lineno += 1
         for hline in h.text:
           if hline.startswith(b"-"):
@@ -1025,7 +1025,7 @@ class PatchSet(object):
           if line.rstrip(b"\r\n") != hline[1:].rstrip(b"\r\n"):
             debug("file is not patched - failed hunk: %d" % (hno+1))
             raise NoMatch
-          line = fp.readline()
+          line = fp.readline(5_000_000)
           lineno += 1
 
     except NoMatch:
